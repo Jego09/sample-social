@@ -1,9 +1,10 @@
 module AuthenticationHelper
-  def sign_in(user, password: 'password123')
+  def sign_in(user, password: 'password') # Changed the password from 'password123' to 'password' to match the data from seeds.rb and factories
     visit login_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: password
     click_button 'Log in'
+    expect(page).to have_content('Log out') # Verify login was successful, helps also on slow test environments.
   end
 
   def sign_out

@@ -63,4 +63,8 @@ RSpec.configure do |config|
 
   # Include AuthenticationHelper for system tests
   config.include AuthenticationHelper, type: :system
+  Capybara.server = :puma, { Silent: true }
+  # Capybara.server_port = 3001
+  # Capybara.javascript_driver = :selenium_chrome_headless
+  Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f } # Added this line to be able to use the test_data.rb file in support folder (AI INFORMATION)
 end

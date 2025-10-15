@@ -1,10 +1,13 @@
 require "capybara/rspec"
 
+Capybara.run_server = false # Running the server with Puma in a separate process to avoid TCP Timeout errors (AI INFORMATION)
 Capybara.ignore_hidden_elements = false
 Capybara.default_max_wait_time = 10
 Capybara.server = :puma, {Silent: true}
 Capybara.always_include_port = true
 Capybara.server_host = '127.0.0.1'
+Capybara.server_port = 3001  # fixed port (AI INFORMATION to avoid TCP Timeout errors)
+Capybara.app_host = "http://127.0.0.1:3001" # match the server port (AI INFORMATION to avoid TCP Timeout errors)
 
 # Configure Chrome options for Selenium
 Capybara.register_driver :selenium_chrome do |app|

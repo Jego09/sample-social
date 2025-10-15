@@ -2,14 +2,18 @@ require 'rails_helper'
 
 RSpec.describe 'User Following', type: :system, signed_in: true do
   let!(:other_user) { create(:user) }
-  let(:current_user) { create(:user, :admin, name: 'John Doe') }
+  let!(:current_user) { create(:user, :admin, email: 'admin@example.com') }
 
   it 'allows user to follow another user from their profile page' do
-    sleep 2
-    visit users_path
+    #removed Sleep to make the test faster, also its unnecessary. 
+    visit users_path 
 
     within('ul.users') do
       first('li a').click
+    end
+
+    within('.users') do
+      click_link 'Alice TestUser' # Click on the user to view their profile
     end
 
     # Check initial followers count
